@@ -1,0 +1,132 @@
+w3: 用什麼套件完成 5-bar Linkage Plotter 與 Openduck mini 零組件設計繪圖？ Solvespace, Siemens NX, Onshape 或其他？各有什麼優缺點？ (plotter.7z, open_duck_mini.7z)
+答:都用onshape，
+✅SolveSpace — 優缺點 & 適合情境
+
+優點
+
+免費 + 開源：對個人、學術或小團隊來說門檻低。
+維基百科
++1
+
+跨平台 (Windows / macOS / Linux)，輕量、啟動快速，不需要強大硬體即可使用。
+Ubunlog
++1
+
+參數式 + 草圖 + 布林運算 + 基本機構模擬：對於簡單零件、機構 linkage、機構運動模擬、快速原型設計很方便。
+維基百科
++2
+Sculpteo
++2
+
+易於導出（STEP, STL, PDF, DXF 等格式）——方便將模型轉到其他 CAD／CAM／3D 列印工具。
+維基百科
++1
+
+缺點 / 限制
+
+功能有限：相較於商業級 CAD，它缺乏高級曲面建模 (complex surfacing)、大型裝配 (large assemblies)、高級模擬 (CAE)、製造整合 (CAM) 等功能。
+ResearchGate
++2
+shapr3d.com
++2
+
+使用者介面 / 流程簡陋：對於習慣商業 CAD 的用戶可能覺得「粗糙」、沒有太多輔助工具。
+Ubunlog
++1
+
+不適合大型 / 工業級專案：若需求是複雜曲面、模具設計、大裝配、CAE、CAM，那 SolveSpace 很可能不夠力。
+
+適合情境
+
+個人學習 / 愛好者 / Maker / 開放原型。
+
+簡單機構、零件設計、3D 列印原型。
+
+預算有限、小型專案、跨平台 / Linux 環境。
+
+✅Siemens NX — 優缺點 & 適合情境
+
+優點
+
+ 功能非常完整 — 支援從零件建模到裝配、曲面造型、模流／有限元素/製造整合 (CAM/CAE/PLM workflows) 等。
+Siemens Blog Network
++2
+clevr.com
++2
+
+ 混合建模方式 (hybrid modeling) — 結合精確建模 (exact modeling) 與靈活的直接建模 (direct modeling)／自由造型 (freeform surfacing)，對於複雜設計、反向工程 (reverse engineering)、工業設計 / 汽車 / 航太 等高精度需求特別有利。
+clevr.com
++1
+
+企業流程整合 (PLM / CAM / CAE / Manufacturing)：適合大型工程團隊、量產製造、跨部門協作與管理。
+Siemens Blog Network
+
+缺點 / 限制
+
+ 成本高：商業授權 + 維護費 + 模組費用通常不低，不太適合個人或小型團隊。
+維基百科
++1
+
+ 學習曲線陡峭 / 複雜：功能多、流程重，對初學者來說可能不易上手。
+Exafol
++1
+
+資源需求高：大裝配、大曲面等操作通常需要較高性能硬體 + 穩定流程管理／資料管理 (PDM／PLM) 支援。
+
+適合情境
+
+專業機械／工業設計、汽車、航太、消費產品設計等高複雜度／高精度需求的產業。
+
+需要整合設計 → 模擬 → 製造 → 量產流程的大型團隊。
+
+對資料一致性、製造可靠度／可重複性有高要求的公司／工廠。
+
+✅Onshape — 優缺點 & 適合情境
+
+優點
+
+ 雲端 + 瀏覽器即用：不需要安裝，也不用擔心平台 (Windows / macOS / Linux) 或硬體限制；只要有瀏覽器與網路即可使用。
+維基百科
++2
+trustradius.com
++2
+
+ 多人即時協作 + 版本控制／資料管理 (built-in PDM)：團隊成員可同時編輯模型、不會出現版本衝突，也方便追蹤歷史與協同設計。
+教育部校園數位內容與教學軟體
++2
+trustradius.com
++2
+
+ 對中小企業 / 分散式團隊友好：開啟門檻低、不需建立龐大的 IT / PDM 基礎設施，也不限作業系統。
+教育部校園數位內容與教學軟體
++2
+trustradius.com
++2
+
+ 彈性 + 可跨裝置 (PC／筆電／平板／手機)：方便在不同地點、不同設備上工作。
+維基百科
++1
+
+缺點 / 限制
+
+功能不如工業級 CAD 完整：尤其在超複雜曲面 (surface modelling)、大型裝配、大量模擬或製造整合方面，比不上 NX。
+trustradius.com
++2
+bestdevops.com
++2
+
+ 依賴網路 & 雲端：若網路不穩或公司政策不允許將資料放雲端，使用會受限。
+bestdevops.com
++1
+
+ 訂閱制／商業授權成本：對於商業用途需要付費 (對個人 / 愛好者也可能是負擔)。
+trustradius.com
++1
+
+適合情境
+
+分散式團隊 (remote / distributed) 協作設計。
+
+中小企業、創客 (maker)、初創公司、不希望為 IT／PDM 架構投資太多。
+
+教育、學生、簡易到中等複雜度機械／機構設計。
