@@ -19,8 +19,274 @@
 <p><img alt="" height="182" src="/images/螢幕擷取畫面 2025-06-13 211516 (1).png" width="416"/></p>
 <h1>w3</h1>
 <p><img alt="" height="2250" src="/images/w3.jpg" width="800"/></p>
-<p></p>
-<h1>w10</h1>
+<h1>w7</h1>
+<p>五連桿機構切割影片:<a href="https://www.youtube.com/watch?v=K8C22ZAvN-Q">https://www.youtube.com/watch?v=K8C22ZAvN-Q<img alt="" height="174" src="/images/螢幕擷取畫面 2025-12-23 025418.png" width="224"/></a></p>
+<p><span>w7 (</span><span>2a 採 Youtube 影片簡報</span><span>):<span> </span></span><a href="https://youtu.be/iOLFP90DneY">5-bar Linkage Plotter</a><span><span> </span>與<span> </span></span><a href="https://mde.tw/cad2025/content/OpenDuck.html">Openduck mini</a><span> 零組件設計繪製完成之後，如何切割零件? 為何要切割零件？ 如何利用<span> </span></span><a href="https://cyberbotics.com/">Webots</a><span><span> </span>進行後續的控制系統設計與動態模擬 (Dynamic Simulation)？(</span><a href="https://mde.tw/cad2025/downloads/plotter_project.7z">plotter_project.7z</a><span>)</span></p><h2>一、Onshape：零組件繪製完成後，如何「切割」零件？</h2>
+<h3>（一）什麼情況叫「切割零件」？</h3>
+<p data-end="176" data-start="170">切割指的是：</p>
+<ul data-end="231" data-start="177">
+<li data-end="204" data-start="177">
+<p data-end="204" data-start="179">把 <strong data-end="204" data-start="181">一個實體 Part 分成多個 Part</strong></p>
+</li>
+<li data-end="231" data-start="205">
+<p data-end="231" data-start="207">或在零件上 <strong data-end="221" data-start="213">去除材料</strong>，形成槽、孔、分件面</p>
+</li>
+</ul>
+<hr data-end="236" data-start="233"/>
+<h3>（二）常用切割方式（實務最重要）</h3>
+<br/>1️⃣ <strong data-end="293" data-start="268">Extrude → Remove（最常用）</strong>
+<p data-end="306" data-start="294">適合：開孔、開槽、減重孔</p>
+<p data-end="314" data-start="308"><strong data-end="314" data-start="308">步驟</strong></p>
+<ol data-end="410" data-start="315">
+<li data-end="337" data-start="315">
+<p data-end="337" data-start="318">建立 Sketch（畫出要切掉的輪廓）</p>
+</li>
+<li data-end="353" data-start="338">
+<p data-end="353" data-start="341">點選 <code data-end="353" data-start="344">Extrude</code></p>
+</li>
+<li data-end="379" data-start="354">
+<p data-end="379" data-start="357">Operation 選 <strong data-end="379" data-start="369">Remove</strong></p>
+</li>
+<li data-end="410" data-start="380">
+<p data-end="410" data-start="383">選擇切割深度（Blind / Through all）</p>
+</li>
+</ol>
+<p data-end="441" data-start="412">📌 <strong data-end="421" data-start="415">優點</strong>：最穩定、Webots 匯出前一定要乾淨</p>
+<hr data-end="446" data-start="443"/>
+<br/>2️⃣ <strong data-end="478" data-start="456">Split（把一個零件切成多個零件）</strong>
+<p data-end="513" data-start="479">適合：<br data-end="485" data-start="482"/> 👉 一開始畫成整塊，後來才發現要分成「兩個會動的零件」</p>
+<p data-end="521" data-start="515"><strong data-end="521" data-start="515">步驟</strong></p>
+<ol data-end="637" data-start="522">
+<li data-end="551" data-start="522">
+<p data-end="551" data-start="525">建立一個「切割平面」（Plane 或 Sketch）</p>
+</li>
+<li data-end="565" data-start="552">
+<p data-end="565" data-start="555">使用 <code data-end="565" data-start="558">Split</code></p>
+</li>
+<li data-end="586" data-start="566">
+<p data-end="586" data-start="569">Target：選要被切的 Part</p>
+</li>
+<li data-end="611" data-start="587">
+<p data-end="611" data-start="590">Tool：選 Plane 或 Sketch</p>
+</li>
+<li data-end="637" data-start="612">
+<p data-end="637" data-start="615">勾選 <strong data-end="637" data-start="618">Keep both sides</strong></p>
+</li>
+</ol>
+<p data-end="661" data-start="639">📌 <strong data-end="661" data-start="642">這個對 Webots 非常重要</strong></p>
+<blockquote data-end="693" data-start="662">
+<p data-end="693" data-start="664">因為 <strong data-end="693" data-start="667">Webots 的關節 = 不同零件之間的運動</strong></p>
+</blockquote>
+<hr data-end="698" data-start="695"/>
+<br/>3️⃣ <strong data-end="730" data-start="708">Boolean → Subtract</strong>
+<p data-end="751" data-start="731">適合：用一個零件「當刀子」去切另一個零件</p>
+<p data-end="759" data-start="753"><strong data-end="759" data-start="753">應用</strong></p>
+<ul data-end="775" data-start="760">
+<li data-end="766" data-start="760">
+<p data-end="766" data-start="762">齒輪互咬</p>
+</li>
+<li data-end="775" data-start="767">
+<p data-end="775" data-start="769">特殊形狀挖空</p>
+</li>
+</ul>
+<hr data-end="780" data-start="777"/>
+<br/>4️⃣ <strong data-end="824" data-start="790">Mate connector + Split（機構導向做法）</strong>
+<p data-end="832" data-start="825">專業建議做法：</p>
+<ul data-end="898" data-start="833">
+<li data-end="862" data-start="833">
+<p data-end="862" data-start="835">先放 <strong data-end="862" data-start="838">Mate connector（未來轉軸）</strong></p>
+</li>
+<li data-end="898" data-start="863">
+<p data-end="898" data-start="865">再用它對齊切割面<br/> ➡️ 後續 Webots 關節軸方向才會完全正確</p>
+</li>
+</ul>
+<hr data-end="903" data-start="900"/>
+<h2>二、為什麼一定要切割零件？（這是關鍵觀念）</h2>
+<h3>❌ 不切割的後果</h3>
+<div class="TyagGW_tableContainer">
+<div class="group TyagGW_tableWrapper flex w-fit flex-col-reverse" tabindex="-1">
+<table class="w-fit min-w-(--thread-content-width)" data-end="1030" data-start="944">
+<thead data-end="955" data-start="944">
+<tr data-end="955" data-start="944">
+<th data-col-size="sm" data-end="949" data-start="944">問題</th>
+<th data-col-size="sm" data-end="955" data-start="949">結果</th>
+</tr>
+</thead>
+<tbody data-end="1030" data-start="966">
+<tr data-end="992" data-start="966">
+<td data-col-size="sm" data-end="976" data-start="966">所有零件是一體</td>
+<td data-col-size="sm" data-end="992" data-start="976">Webots 無法加關節</td>
+</tr>
+<tr data-end="1012" data-start="993">
+<td data-col-size="sm" data-end="1002" data-start="993">沒有獨立質量</td>
+<td data-col-size="sm" data-end="1012" data-start="1002">動態模擬錯誤</td>
+</tr>
+<tr data-end="1030" data-start="1013">
+<td data-col-size="sm" data-end="1022" data-start="1013">無法定義慣量</td>
+<td data-col-size="sm" data-end="1030" data-start="1022">控制不穩</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr data-end="1035" data-start="1032"/>
+<h3>✅ 切割後你能做到</h3>
+<ol data-end="1198" data-start="1051">
+<li data-end="1081" data-start="1051">
+<p data-end="1081" data-start="1054"><strong data-end="1081" data-start="1054">每個零件 = 一個剛體（Rigid Body）</strong></p>
+</li>
+<li data-end="1141" data-start="1082">
+<p data-end="1089" data-start="1085">可設定：</p>
+<ul data-end="1141" data-start="1093">
+<li data-end="1103" data-start="1093">
+<p data-end="1103" data-start="1095">質量（Mass）</p>
+</li>
+<li data-end="1120" data-start="1107">
+<p data-end="1120" data-start="1109">慣性（Inertia）</p>
+</li>
+<li data-end="1141" data-start="1124">
+<p data-end="1141" data-start="1126">碰撞形狀（Collision）</p>
+</li>
+</ul>
+</li>
+<li data-end="1198" data-start="1142">
+<p data-end="1149" data-start="1145">可加入：</p>
+<ul data-end="1198" data-start="1153">
+<li data-end="1173" data-start="1153">
+<p data-end="1173" data-start="1155">Revolute joint（轉動）</p>
+</li>
+<li data-end="1198" data-start="1177">
+<p data-end="1198" data-start="1179">Prismatic joint（滑動）</p>
+</li>
+</ul>
+</li>
+</ol>
+<p data-end="1210" data-start="1200">📌 一句話總結</p>
+<blockquote data-end="1238" data-start="1211">
+<p data-end="1238" data-start="1213"><strong data-end="1238" data-start="1213">「切割零件 = 把 CAD 變成物理系統」</strong></p>
+</blockquote>
+<hr data-end="1243" data-start="1240"/>
+<h2>三、Onshape → Webots 的正確銜接流程</h2>
+<h3>Step 1️⃣ 在 Onshape 準備給模擬用的模型</h3>
+<p data-end="1380" data-start="1309">✔ 每個會動的部件 = 獨立 Part<br data-end="1331" data-start="1328"/> ✔ 關節位置已用 Mate connector 對齊<br data-end="1360" data-start="1357"/> ✔ 不要留「裝飾性倒角」（減少計算負擔）</p>
+<hr data-end="1385" data-start="1382"/>
+<h3>Step 2️⃣ 匯出 CAD</h3>
+<p data-end="1415" data-start="1407"><strong data-end="1415" data-start="1407">建議格式</strong></p>
+<ul data-end="1453" data-start="1416">
+<li data-end="1432" data-start="1416">
+<p data-end="1432" data-start="1418"><code data-end="1432" data-start="1418">STEP (.step)</code></p>
+</li>
+<li data-end="1453" data-start="1433">
+<p data-end="1453" data-start="1435">或 <code data-end="1449" data-start="1437">URDF + STL</code>（進階）</p>
+</li>
+</ul>
+<p data-end="1462" data-start="1455">⚠️ 不建議：</p>
+<ul data-end="1478" data-start="1463">
+<li data-end="1478" data-start="1463">
+<p data-end="1478" data-start="1465">單一 STL（會失去結構）</p>
+</li>
+</ul>
+<hr data-end="1483" data-start="1480"/>
+<h2>四、Webots：後續控制系統設計與動態模擬</h2>
+<hr data-end="1515" data-start="1512"/>
+<h2>四-1 Webots 裡你要建立什麼？</h2>
+<h3>（一）剛體（Solid）</h3>
+<p data-end="1594" data-start="1558">每個 Onshape Part → Webots 的一個 <code data-end="1594" data-start="1587">Solid</code></p>
+<p data-end="1601" data-start="1596">重要屬性：</p>
+<ul data-end="1647" data-start="1602">
+<li data-end="1610" data-start="1602">
+<p data-end="1610" data-start="1604"><code data-end="1610" data-start="1604">mass</code></p>
+</li>
+<li data-end="1628" data-start="1611">
+<p data-end="1628" data-start="1613"><code data-end="1628" data-start="1613">inertiaMatrix</code></p>
+</li>
+<li data-end="1647" data-start="1629">
+<p data-end="1647" data-start="1631"><code data-end="1647" data-start="1631">boundingObject</code></p>
+</li>
+</ul>
+<hr data-end="1652" data-start="1649"/>
+<h3>（二）關節（Joint）</h3>
+<div class="TyagGW_tableContainer">
+<div class="group TyagGW_tableWrapper flex w-fit flex-col-reverse" tabindex="-1">
+<table class="w-fit min-w-(--thread-content-width)" data-end="1759" data-start="1671">
+<thead data-end="1691" data-start="1671">
+<tr data-end="1691" data-start="1671">
+<th data-col-size="sm" data-end="1681" data-start="1671">Onshape</th>
+<th data-col-size="sm" data-end="1691" data-start="1681">Webots</th>
+</tr>
+</thead>
+<tbody data-end="1759" data-start="1702">
+<tr data-end="1734" data-start="1702">
+<td data-col-size="sm" data-end="1720" data-start="1702">Mate (Revolute)</td>
+<td data-col-size="sm" data-end="1734" data-start="1720">HingeJoint</td>
+</tr>
+<tr data-end="1759" data-start="1735">
+<td data-col-size="sm" data-end="1744" data-start="1735">Slider</td>
+<td data-col-size="sm" data-end="1759" data-start="1744">SliderJoint</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p data-end="1785" data-start="1761">📌 關節軸方向必須與 Onshape 設計一致</p>
+<hr data-end="1790" data-start="1787"/>
+<h3>（三）致動器（Motor）</h3>
+<div class="contain-inline-size rounded-2xl corner-superellipse/1.1 relative bg-token-sidebar-surface-primary">
+<div class="@w-xl/main:top-9 sticky top-[calc(--spacing(9)+var(--header-height))]">
+<div class="absolute end-0 bottom-0 flex h-9 items-center pe-2">
+<div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div>
+</div>
+</div>
+<div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-text"><span><span>RotationalMotor PositionSensor </span></span></code></div>
+</div>
+<hr data-end="1857" data-start="1854"/>
+<h2>四-2 動態模擬（Dynamic Simulation）你在模擬什麼？</h2>
+<h3>1️⃣ 正向動力學（Forward Dynamics）</h3>
+<p data-end="1945" data-start="1931">👉 給馬達扭矩，看會怎麼動</p>
+<h3>2️⃣ 逆運動學 + 控制</h3>
+<p data-end="1983" data-start="1965">👉 給目標軌跡（例如畫蘋果 🍎）</p>
+<ul data-end="2001" data-start="1984">
+<li data-end="1992" data-start="1984">
+<p data-end="1992" data-start="1986">計算關節角度</p>
+</li>
+<li data-end="2001" data-start="1993">
+<p data-end="2001" data-start="1995">控制馬達追蹤</p>
+</li>
+</ul>
+<hr data-end="2006" data-start="2003"/>
+<h2>四-3 控制系統設計流程（實務版）</h2>
+<h3>① 開啟物理</h3>
+<div class="contain-inline-size rounded-2xl corner-superellipse/1.1 relative bg-token-sidebar-surface-primary">
+<div class="@w-xl/main:top-9 sticky top-[calc(--spacing(9)+var(--header-height))]">
+<div class="absolute end-0 bottom-0 flex h-9 items-center pe-2">
+<div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div>
+</div>
+</div>
+<div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-text"><span><span>WorldInfo: basicTimeStep 16 </span></span></code></div>
+</div>
+<h3>② 馬達模式</h3>
+<div class="contain-inline-size rounded-2xl corner-superellipse/1.1 relative bg-token-sidebar-surface-primary">
+<div class="@w-xl/main:top-9 sticky top-[calc(--spacing(9)+var(--header-height))]">
+<div class="absolute end-0 bottom-0 flex h-9 items-center pe-2">
+<div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div>
+</div>
+</div>
+<div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-python"><span><span>motor.setPosition(target) motor.setVelocity(max_vel) </span></span></code></div>
+</div>
+<h3>③ 加 PID（你之前已碰過）</h3>
+<div class="contain-inline-size rounded-2xl corner-superellipse/1.1 relative bg-token-sidebar-surface-primary">
+<div class="@w-xl/main:top-9 sticky top-[calc(--spacing(9)+var(--header-height))]">
+<div class="absolute end-0 bottom-0 flex h-9 items-center pe-2">
+<div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div>
+</div>
+</div>
+<div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-python"><span><span>error = target - sensor.getValue() torque = kp*error + kd*derr motor.setTorque(torque) </span></span></code></div>
+</div>
+<hr data-end="2288" data-start="2285"/>
+<h2>五、把三件事串成一句話（你現在該有的工程觀）</h2>
+<blockquote data-end="2414" data-start="2317">
+<p data-end="2414" data-start="2319"><strong data-end="2335" data-start="2319">Onshape 切割零件</strong><br data-end="2338" data-start="2335"/> → 定義「哪些東西會動」<br data-end="2355" data-start="2352"/> → 匯入 Webots 成為剛體<br data-end="2376" data-start="2373"/> → 用關節 + 馬達 + PID<br data-end="2397" data-start="2394"/> → 做真實的「動態模擬與控制」</p>
+</blockquote><h1>w10</h1>
 <p><img alt="" height="4500" src="/images/w10.jpg" width="800"/></p>
 <p></p>
 <h1>w14</h1>
